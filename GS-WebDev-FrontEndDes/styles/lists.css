@@ -1,0 +1,16 @@
+.lista-consumidores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.consumidor {
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    transition: transform 0.3s;
+}
+
+.consumidor:hover {
+    transform: translateY(-5px);
+}

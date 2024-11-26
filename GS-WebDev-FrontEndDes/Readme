@@ -1,0 +1,72 @@
+Desenvolvido por:
+Erick Cardoso RM 560440
+Davi Daparé RM 560721
+João Victor RM 560439
+
+# Eficiência Energética
+
+Este é o repositório do projeto **Eficiência Energética**, um site desenvolvido para conscientizar sobre o uso eficiente de energia elétrica, apresentando dicas práticas, informações sobre os maiores consumidores de energia e tecnologias sustentáveis, além de ferramentas interativas como uma calculadora de consumo energético.
+
+---
+
+## 🚀 **Funcionalidades do Projeto**
+
+### 1. **Tela de Carregamento (Loading Screen)**
+- Tela inicial com barra de progresso animada que exibe o logo da aplicação e introduz o usuário ao site.
+
+### 2. **Menu Responsivo**
+- Navegação dinâmica que se adapta a diferentes dispositivos.
+- Alternância entre menu principal e hamburguer para dispositivos móveis.
+
+### 3. **Banner Interativo**
+- Seção inicial com um banner chamativo e overlay para destacar a mensagem principal.
+
+### 4. **Sessões Informativas**
+- **Maiores Consumidores de Energia:** Explicação sobre quais aparelhos mais consomem energia e o impacto percentual no consumo residencial.
+- **Consumo Consciente:** Texto explicativo sobre como pequenos hábitos podem impactar a sustentabilidade.
+- **Dicas de Economia:** Cartões interativos com práticas eficientes para economizar energia.
+
+### 5. **Calculadora de Consumo**
+- Ferramenta interativa que permite calcular o consumo mensal de aparelhos com base no tempo de uso e dias de operação.
+- Exibe dicas de economia personalizadas para cada aparelho.
+
+### 6. **Carrossel de Tecnologias Sustentáveis**
+- Destaques visuais de soluções como Energia Solar, Energia Eólica e Casas Inteligentes.
+- Navegação dinâmica com botões e indicadores de progresso.
+
+### 7. **Sessão Green IT**
+- Tecnologias avançadas voltadas à sustentabilidade no setor de TI, como data centers verdes, computação em nuvem e gerenciamento de resíduos eletrônicos.
+
+### 8. **Formulário de Contato**
+- Ferramenta para os usuários enviarem sugestões ou dúvidas diretamente pelo site.
+
+---
+
+## 🛠️ **Tecnologias Utilizadas**
+
+### **Frontend**
+- **HTML5:** Estrutura semântica e moderna.
+- **CSS3:** Design responsivo, transições suaves e animações.
+- **JavaScript:** Funcionalidades dinâmicas e interatividade (DOM, eventos e animações).
+
+### **Dependências Externas**
+- **FontAwesome:** Ícones estilizados para melhorar a experiência visual.
+- **Google Fonts:** Tipografia moderna para aprimorar a leitura.
+
+---
+
+## 🎨 **Destaques Visuais**
+
+1. **Paleta de Cores:**
+   - **Primária:** `#2ecc71` (verde sustentável).
+   - **Secundária:** `#27ae60`.
+   - **Neutras:** `#f5f5f5` (fundo claro), `#333` (texto).
+
+2. **Design Responsivo:**
+   - Utiliza _media queries_ para garantir acessibilidade em todos os dispositivos.
+
+3. **Animações:**
+   - Transições suaves em interações, como no hover dos cartões de dicas e na barra de progresso do carregamento.
+
+---
+

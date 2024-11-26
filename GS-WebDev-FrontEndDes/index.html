@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eficiência Energética</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/index.css
+    ">
+    
+    
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-content">
+            <img src="./src/imgs/JEDMENU.svg" alt="JED Logo" class="loading-logo">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="progress-text">0%</div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="conteudo-principal" style="opacity: 0;">
+        <div class="menu-overlay"></div>
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="./src/imgs/JEDMENU.svg" alt="JED Logo">
+                </div>
+                
+                <nav class="menu">
+                    <button class="fechar-menu" aria-label="Fechar Menu">×</button>
+                    <a href="#banner">Início</a>
+                    <a href="#consumidores">Consumidores</a>
+                    <a href="#consciente">Consumo</a>
+                    <a href="#dicas">Dicas</a>
+                    <a href="#calculadora">Calculadora</a>
+                    <a href="#greentech">Green IT</a>
+                    <a href="#contato">Contato</a>
+                </nav>
+
+                <div class="header-right">
+                    <a href="https://github.com/Erickncardoso/GS_JED-Green" target="_blank" class="repo-button">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <button class="menu-toggle">☰</button>
+                </div>
+            </div>
+        </header>
+
+        <section id="banner" class="banner">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <h1>Energia Consciente</h1>
+                <p>Transformando o futuro através do consumo responsável de energia</p>
+            </div>
+        </section>
+
+        <main class="conteudo">
+            <section id="consumidores" class="secao">
+                <h1 class="titulo">Maiores Consumidores de Energia</h1>
+                <div class="lista-consumidores">
+                    <article class="consumidor">
+                        <h2>Ar Condicionado</h2>
+                        <p>Responsável por até <span class="contador" data-meta="60">0</span>% do consumo residencial em períodos quentes.</p>
+                    </article>
+                    <article class="consumidor">
+                        <h2>Chuveiro Elétrico</h2>
+                        <p>Pode representar <span class="contador" data-meta="30">0</span>% do consumo mensal de energia.</p>
+                    </article>
+                    <article class="consumidor">
+                        <h2>Geladeira</h2>
+                        <p>Consome cerca de <span class="contador" data-meta="20">0</span>% da energia residencial.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="consciente" class="secao">
+                <h2 class="titulo">Consumo Consciente</h2>
+                <div class="conteudo-consciente">
+                    <p>O consumo consciente de energia é fundamental para a preservação do meio ambiente e redução de custos. Através de pequenas mudanças em nossos hábitos diários, podemos fazer uma grande diferença.</p>
+                </div>
+            </section>
+
+            <section id="destaques" class="secao">
+                <h2 class="titulo">Destaques em Energia Sustentável</h2>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="slide">
+                            <img src="./src/imgs/slide_engsolar.webp" alt="Lampada e Placa">
+                            <div class="slide-content">
+                                <h3>Energia Solar</h3>
+                                <p>Transforme a luz do sol em energia limpa e renovável</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="./src/imgs/slide_engeolica.webp" alt="Turbinas Eólicas">
+                            <div class="slide-content">
+                                <h3>Energia Eólica</h3>
+                                <p>Aproveite o poder dos ventos para gerar energia sustentável</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="./src/imgs/slide_casaauto.webp" alt="Casa Inteligente">
+                            <div class="slide-content">
+                                <h3>Casa Inteligente</h3>
+                                <p>Automatize sua casa para máxima eficiência energética</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn prev">&#10094;</button>
+                    <button class="carousel-btn next">&#10095;</button>
+                    <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dicas" class="secao">
+                <h2 class="titulo">Dicas Práticas de Economia</h2>
+                <div class="dicas-container">
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Iluminação Inteligente</h3>
+                        <ul class="dica-lista">
+                            <li>Use lâmpadas LED</li>
+                            <li>Aproveite a luz natural</li>
+                            <li>Desligue luzes de ambientes vazios</li>
+                            <li>Instale sensores de movimento</li>
+                        </ul>
+                    </div>
+
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <h3>Climatização Eficiente</h3>
+                        <ul class="dica-lista">
+                            <li>Mantenha filtros limpos</li>
+                            <li>Use temperatura adequada (23-24°C)</li>
+                            <li>Evite entrada de calor externo</li>
+                            <li>Faça manutenção regular</li>
+                        </ul>
+                    </div>
+
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3>Aparelhos Elétricos</h3>
+                        <ul class="dica-lista">
+                            <li>Desligue aparelhos em standby</li>
+                            <li>Use timers e programações</li>
+                            <li>Opte por aparelhos Selo A</li>
+                            <li>Evite deixar carregadores na tomada</li>
+                        </ul>
+                    </div>
+
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Lavagem e Secagem</h3>
+                        <ul class="dica-lista">
+                            <li>Lave roupas com carga completa</li>
+                            <li>Use água fria quando possível</li>
+                            <li>Aproveite o sol para secar</li>
+                            <li>Faça manutenção da máquina</li>
+                        </ul>
+                    </div>
+
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-kitchen-set"></i>
+                        </div>
+                        <h3>Cozinha Econômica</h3>
+                        <ul class="dica-lista">
+                            <li>Use tampa nas panelas</li>
+                            <li>Evite abrir muito a geladeira</li>
+                            <li>Descongele alimentos na geladeira</li>
+                            <li>Limpe regularmente os equipamentos</li>
+                        </ul>
+                    </div>
+
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <h3>Energia Solar</h3>
+                        <ul class="dica-lista">
+                            <li>Considere painéis solares</li>
+                            <li>Aproveite aquecimento solar</li>
+                            <li>Estude a viabilidade</li>
+                            <li>Consulte especialistas</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calculadora" class="secao">
+                <h2 class="titulo">Calculadora de Energia</h2>
+                <div class="calculadora-container">
+                    <form id="calculadoraForm" class="calculadora">
+                        <div class="calc-grupo">
+                            <label for="aparelho">Aparelho:</label>
+                            <select id="aparelho" name="aparelho" required>
+                                <option value="">Selecione um aparelho</option>
+                                <option value="ar" data-potencia="1400">Ar Condicionado</option>
+                                <option value="chuveiro" data-potencia="5500">Chuveiro Elétrico</option>
+                                <option value="geladeira" data-potencia="250">Geladeira</option>
+                                <option value="tv" data-potencia="90">TV LED 40"</option>
+                                <option value="micro" data-potencia="1200">Micro-ondas</option>
+                            </select>
+                        </div>
+                        <div class="calc-grupo">
+                            <label for="horas">Horas de uso por dia:</label>
+                            <input type="number" id="horas" name="horas" min="0" max="24" required>
+                        </div>
+                        <div class="calc-grupo">
+                            <label for="dias">Dias por mês:</label>
+                            <input type="number" id="dias" name="dias" min="0" max="31" required>
+                        </div>
+                        <button type="submit" class="btn-calcular">Calcular Consumo</button>
+                    </form>
+                    <div class="resultado-calculo">
+                        <div class="resultado-item">
+                            <h3>Consumo Mensal</h3>
+                            <p><span id="consumoKwh">0</span> kWh</p>
+                        </div>
+                        <div class="resultado-item">
+                            <h3>Custo Estimado</h3>
+                            <p>R$ <span id="custoMensal">0,00</span></p>
+                        </div>
+                        <div class="dica-economia">
+                            <h3>Dica de Economia</h3>
+                            <p id="dicaEconomia">Selecione um aparelho para ver dicas de economia.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="greentech" class="secao">
+                <h2 class="titulo">Green IT & Tecnologias Sustentáveis</h2>
+                <div class="greentech-intro">
+                    <p>Descubra as mais recentes inovações em tecnologia verde e como elas estão revolucionando a eficiência energética no setor de TI.</p>
+                </div>
+                
+                <div class="greentech-grid">
+                    <article class="tech-card">
+                        <div class="tech-image">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="tech-content">
+                            <h3>Data Centers Verdes</h3>
+                            <p>Centros de dados modernos com sistemas de resfriamento natural e energia renovável.</p>
+                            <ul class="tech-features">
+                                <li>Resfriamento por ar livre</li>
+                                <li>Energia 100% renovável</li>
+                                <li>Virtualização avançada</li>
+                            </ul>
+                            <div class="tech-stats">
+                                <div class="stat">
+                                    <span class="stat-value">75%</span>
+                                    <span class="stat-label">Economia de Energia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tech-card">
+                        <div class="tech-image">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="tech-content">
+                            <h3>Cloud Computing Verde</h3>
+                            <p>Soluções em nuvem otimizadas para máxima eficiência energética.</p>
+                            <ul class="tech-features">
+                                <li>Recursos sob demanda</li>
+                                <li>Otimização automática</li>
+                                <li>Menor pegada de carbono</li>
+                            </ul>
+                            <div class="tech-stats">
+                                <div class="stat">
+                                    <span class="stat-value">60%</span>
+                                    <span class="stat-label">Redução de CO₂</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tech-card">
+                        <div class="tech-image">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="tech-content">
+                            <h3>Hardware Eficiente</h3>
+                            <p>Componentes de última geração com foco em eficiência energética.</p>
+                            <ul class="tech-features">
+                                <li>Processadores eco-friendly</li>
+                                <li>Componentes reciclados</li>
+                                <li>Gestão térmica inteligente</li>
+                            </ul>
+                            <div class="tech-stats">
+                                <div class="stat">
+                                    <span class="stat-value">40%</span>
+                                    <span class="stat-label">Menos Consumo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tech-card">
+                        <div class="tech-image">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="tech-content">
+                            <h3>Software Verde</h3>
+                            <p>Desenvolvimento de software otimizado para consumo eficiente de recursos.</p>
+                            <ul class="tech-features">
+                                <li>Código eficiente</li>
+                                <li>Otimização de algoritmos</li>
+                                <li>Monitoramento em tempo real</li>
+                            </ul>
+                            <div class="tech-stats">
+                                <div class="stat">
+                                    <span class="stat-value">35%</span>
+                                    <span class="stat-label">Mais Eficiente</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tech-card">
+                        <div class="tech-image">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="tech-content">
+                            <h3>Redes Inteligentes</h3>
+                            <p>Infraestrutura de rede com gerenciamento dinâmico de energia.</p>
+                            <ul class="tech-features">
+                                <li>Roteamento eficiente</li>
+                                <li>Adaptação automática</li>
+                                <li>Economia em standby</li>
+                            </ul>
+                            <div class="tech-stats">
+                                <div class="stat">
+                                    <span class="stat-value">45%</span>
+                                    <span class="stat-label">Menos Energia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tech-card">
+                        <div class="tech-image">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <div class="tech-content">
+                            <h3>E-waste Management</h3>
+                            <p>Gestão responsável de resíduos eletrônicos e reciclagem de componentes.</p>
+                            <ul class="tech-features">
+                                <li>Reciclagem certificada</li>
+                                <li>Recuperação de materiais</li>
+                                <li>Logística reversa</li>
+                            </ul>
+                            <div class="tech-stats">
+                                <div class="stat">
+                                    <span class="stat-value">90%</span>
+                                    <span class="stat-label">Reciclável</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="tecnologia" class="secao">
+                <h2 class="titulo">Tecnologias Green IT</h2>
+                <div class="tecnologias">
+                    <article class="tecnologia">
+                        <div class="tecnologia-imagem">
+                            <img src="./src/imgs/slide_engsolar.webp" alt="Painéis Solares">
+                        </div>
+                        <h3>Energia Solar</h3>
+                        <p>Painéis solares modernos com alta eficiência energética.</p>
+                    </article>
+                    <article class="tecnologia">
+                        <div class="tecnologia-imagem">
+                            <img src="./src/imgs/slide_casaauto.webp" alt="Casa Inteligente">
+                        </div>
+                        <h3>Casa Inteligente</h3>
+                        <p>Sistemas automatizados para otimização do consumo.</p>
+                    </article>
+                    <article class="tecnologia">
+                        <div class="tecnologia-imagem">
+                            <img src="./src/imgs/slide_engeolica.webp" alt="Energia Eólica">
+                        </div>
+                        <h3>Energia Eólica</h3>
+                        <p>Aproveitamento da força dos ventos para geração limpa.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="contato" class="secao">
+                <h2 class="titulo">Entre em Contato</h2>
+                <form id="formContato" class="formulario-contato">
+                    <div class="form-grupo">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="rodape">
+            <p>Desenvolvido para promover o consumo consciente de energia</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

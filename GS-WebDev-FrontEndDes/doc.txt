@@ -1,0 +1,28 @@
+Desenvolvido por:
+Erick Cardoso RM 560440
+Davi Daparé RM 560721
+João Victor RM 560439
+
+GitHub: https://github.com/oVictorFerreira
+
+• Criar alertas
+criamos cards de alerta ao consultar uma informação a calculadora ou formulário
+com um progress bar de carregamento. 
+
+• Usar plataforma de versionamento (git e Github)
+está tudo versionado no Github
+
+• Efeitos de menu dinâmicos
+menu com animação ao passar o mouse e ao clicar leva para o tal desejado.
+
+• Validação de formulários (ex. Inscrições) com alertas
+Validação com cards superior informando as condições do formulário
+
+• Carrossel dinâmicos
+Carrossel slide de informações
+
+• Manipulação do DOM
+Manipulação dos números de cada eletrodoméstico.
+
+• Usar boas práticas de código Web Development utilizado em aulas.
+feito com sucesso.

@@ -1,0 +1,296 @@
+.conteudo {
+    margin-top: 4rem;
+    padding: 2rem;
+}
+
+.secao {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+}
+
+.titulo {
+    color: var(--cor-primaria);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.lista-consumidores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.consumidor {
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    transition: transform 0.3s;
+}
+
+.consumidor:hover {
+    transform: translateY(-5px);
+}
+
+/* Dicas Práticas */
+.lista-dicas {
+    list-style-position: inside;
+    padding: 1rem;
+}
+
+.lista-dicas li {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.tecnologias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.tecnologia {
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.tecnologia h3 {
+    color: var(--cor-primaria);
+    margin-bottom: 1rem;
+}
+
+.dicas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dica-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.dica-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #2ecc71, #2ecc70b8);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.dica-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dica-card:hover::before {
+    transform: scaleX(1);
+}
+
+.dica-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #2ecc7120, #2ecc7120);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.dica-card:hover .dica-icon {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #2ecc7140, #2ecc7140);
+}
+
+.dica-icon i {
+    font-size: 2rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.dica-card:hover .dica-icon i {
+    color: #2ecc71;
+}
+
+.dica-card h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.dica-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.dica-lista li {
+    padding: 0.75rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+}
+
+.dica-lista li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    transition: all 0.3s ease;
+}
+
+.dica-card:hover .dica-lista li {
+    color: #2c3e50;
+    transform: translateX(5px);
+}
+
+
+#greentech {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.greentech-intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.greentech-intro p {
+    font-size: 1.2rem;
+    color: #495057;
+    line-height: 1.6;
+}
+
+.greentech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tech-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.tech-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.tech-image {
+    height: 120px;
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-image i {
+    font-size: 3rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.tech-card:hover .tech-image i {
+    transform: scale(1.1);
+}
+
+.tech-content {
+    padding: 1.5rem;
+}
+
+.tech-content h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.tech-content p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.tech-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.tech-features li {
+    padding: 0.5rem 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+.tech-features li::before {
+    content: "→";
+    margin-right: 0.5rem;
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.tech-stats {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+
+
