@@ -76,7 +76,7 @@ Disponível no Wokwi, mas será migrado para o GitHub com modularização futura
 ## 🖼️ Imagens de Simulação
 
 ![Montagem no Wokwi](https://github.com/user-attachments/assets/e6a53b07-fd96-4a7c-ae4d-1f4a229d7356)
-![Fluxograma](https://github.com/user-attachments/assets/10a8b65b-e242-4050-a0c4-7831f06619c8)
+![Fluxograma]()
 
 ## Links Externos
 - [Documentação Técnica](https://docs.google.com/document/d/1Z9Fu4Gfrlv3Qu_EUzGQVUTOyZfjbj4FEVXcCdOAh9mo/edit?usp=sharing)  
