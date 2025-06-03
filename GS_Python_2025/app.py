@@ -1,3 +1,10 @@
+# João Victor da Silva Ferreira - RM 560439
+# Erick Cardoso - RM 560440
+# Davi Daparé - RM 560721
+
+# Projeto: Sistema de Monitoramento de Enchentes
+# Descrição: Este é o arquivo principal da aplicação Flask que conecta ao banco de dados MySQL e inicia o servidor.
+
 # Importa as bibliotecas necessárias
 from flask import Flask, request, jsonify          # Flask para criar servidor web e lidar com requisições JSON
 import mysql.connector                             # Biblioteca para conectar com o MySQL

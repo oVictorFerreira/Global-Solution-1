@@ -1,3 +1,9 @@
+# João Victor da Silva Ferreira - RM 560439
+# Erick Cardoso - RM 560440
+# Davi Daparé - RM 560721
+
+# Este módulo define as rotas da aplicação Flask para gerenciar relatos de enchentes.
+
 from flask import request, jsonify                # Para receber dados (request) e responder em JSON
 from datetime import datetime                     # Para usar data/hora
 import os                                         # Para criar pasta e salvar arquivos

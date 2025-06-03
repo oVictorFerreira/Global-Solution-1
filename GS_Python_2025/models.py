@@ -1,10 +1,16 @@
+# João Victor da Silva Ferreira - RM 560439
+# Erick Cardoso - RM 560440
+# Davi Daparé - RM 560721
+
+# Modulo para configurar o banco de dados MySQL
+
 import mysql.connector  # Biblioteca para conectar ao MySQL
 
 # Configurações (você pode trocar por leitura de arquivo no futuro)
-USUARIO = "seu_usuario"  # Trocar pelo seu usuário do MySQL
-SENHA = "sua_senha"  # Trocar pela sua senha do MySQL
+USUARIO = "seu_usuario"  # Usuário do MySQL
+SENHA = "sua_senha"  # Senha do MySQL
 HOST = "localhost"  # Endereço do MySQL
-BANCO = "ENCHENTES_DB"  # Nome do banco desejado
+BANCO = "GS_2025"  # Nome do banco desejado
 
 try:
     # Conecta sem banco específico só para criar, se necessário
