@@ -73,7 +73,7 @@ Disponível no Wokwi, mas será migrado para o GitHub com modularização futura
   └─> [Exibir no LCD]  
 ```
 
-## 🖼️ Imagens de Simulação
+## Imagens de Simulação
 
 ![Montagem no Wokwi](https://github.com/user-attachments/assets/e6a53b07-fd96-4a7c-ae4d-1f4a229d7356)
 ![Fluxograma]()
