@@ -92,7 +92,7 @@ def register_routes(app):
         session.close()
         return jsonify({"mensagem": "Relato excluido com sucesso"})
 
-    # Rota GET que exporta os relatos aprovados em .txt (relatos da semana)
+    # Rota GET que exporta os relatos aprovados em .txt(relatos da semana)
     @app.route('/relatos/semana', methods=['GET'])
     def exportar_txt_semana():
         session = Session()

@@ -1,3 +1,6 @@
+
+# Descrição: Este é o arquivo que configura e conecta ao banco de dados SQL.
+
 # Import das classes do SQLAlchemy para manipular o banco de dados
 from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base

@@ -2,8 +2,8 @@
 # Erick Cardoso - RM 560440
 # Davi Daparé - RM 560721
 
-# Projeto: Sistema de Monitoramento de Enchentes
-# Descrição: Este é o arquivo principal da aplicação Flask que conecta ao banco de dados MySQL e inicia o servidor.
+# Projeto: Sistema de Monitoramento de Enchentes - AlagaNão!
+# Descrição: Este é o arquivo principal da aplicação Flask que conecta ao banco de dados SQL e inicia o servidor.
 
 # app.py - Arquivo principal da aplicação Flask
 
