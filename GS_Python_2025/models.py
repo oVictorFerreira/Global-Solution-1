@@ -1,50 +1,39 @@
-# João Victor da Silva Ferreira - RM 560439
-# Erick Cardoso - RM 560440
-# Davi Daparé - RM 560721
+# Import das classes do SQLAlchemy para manipular o banco de dados
+from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-# Modulo para configurar o banco de dados MySQL
+# Define a URL de conexão com o banco PostgreSQL
+DATABASE_URL = 'postgresql://postgres:joao@localhost:5432/ALAGANAO_DB'
 
-import mysql.connector  # Biblioteca para conectar ao MySQL
+# Cria uma base de modelo (classe base para tabelas)
+Base = declarative_base()
 
-# Configurações (você pode trocar por leitura de arquivo no futuro)
-USUARIO = "seu_usuario"  # Usuário do MySQL
-SENHA = "sua_senha"  # Senha do MySQL
-HOST = "localhost"  # Endereço do MySQL
-BANCO = "GS_2025"  # Nome do banco desejado
+# Cria o mecanismo de conexão com o banco de dados
+engine = create_engine(DATABASE_URL)
 
-try:
-    # Conecta sem banco específico só para criar, se necessário
-    conexao_inicial = mysql.connector.connect(
-        host=HOST,
-        user=USUARIO,
-        password=SENHA
-    )
-    cursor_inicial = conexao_inicial.cursor()
-    cursor_inicial.execute(f"CREATE DATABASE IF NOT EXISTS {BANCO}")  # Cria banco se não existir
-    conexao_inicial.close()
+# Cria uma fábrica de sessões para interagir com o banco
+Session = sessionmaker(bind=engine)
 
-    # Conecta agora ao banco definitivo
-    conexao = mysql.connector.connect(
-        host=HOST,
-        user=USUARIO,
-        password=SENHA,
-        database=BANCO
-    )
-    cursor = conexao.cursor()
+# Define o modelo da tabela 'relatos'
+class Relato(Base):
+    __tablename__ = 'relatos'  # Nome da tabela no banco
 
-    # Cria a tabela RELATOS se não existir
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS RELATOS (
-            ID INT AUTO_INCREMENT PRIMARY KEY,
-            BAIRRO VARCHAR(100) NOT NULL,
-            NIVEL VARCHAR(20) NOT NULL,
-            MENSAGEM TEXT NOT NULL,
-            DATA DATETIME NOT NULL,
-            APROVADO BOOLEAN DEFAULT FALSE
-        )
-    """)
-    conexao.commit()
-    print(f"✅ Banco '{BANCO}' e tabela 'RELATOS' prontos para uso.")
+    # Define as colunas da tabela
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)         # Título do relato
+    message = Column(String, nullable=False)       # Descrição do ocorrido
+    severity = Column(String, nullable=False)      # Nível de gravidade (leve, moderado, severo)
+    latitude = Column(Float, nullable=False)       # Coordenada geográfica
+    longitude = Column(Float, nullable=False)      # Coordenada geográfica
+    neighborhood = Column(String, nullable=False)  # Bairro
+    water_level = Column(Float)                    # Altura da água (opcional)
+    affected_people = Column(Integer)              # Quantidade de pessoas afetadas
+    rescue_needed = Column(Boolean, default=False) # Se é necessário resgate
+    people_trapped = Column(Integer, default=0)    # Pessoas presas no local
+    access_blocked = Column(Boolean, default=False)# Acesso bloqueado
+    images = Column(String)                        # Imagem opcional
+    aprovado = Column(Boolean, default=False)      # Se o relato foi aprovado por um moderador
 
-except Exception as e:
-    print(f"Erro ao configurar banco de dados: {e}")
+# Cria fisicamente a tabela no banco, se ainda não existir
+Base.metadata.create_all(engine)

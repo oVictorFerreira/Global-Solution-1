@@ -5,27 +5,32 @@
 # Projeto: Sistema de Monitoramento de Enchentes
 # Descrição: Este é o arquivo principal da aplicação Flask que conecta ao banco de dados MySQL e inicia o servidor.
 
-# Importa as bibliotecas necessárias
-from flask import Flask, request, jsonify          # Flask para criar servidor web e lidar com requisições JSON
-import mysql.connector                             # Biblioteca para conectar com o MySQL
+# app.py - Arquivo principal da aplicação Flask
 
-# Inicializa a aplicação Flask
-app = Flask(__name__)
+# Importação da classe Flask para criar a aplicação web
+# Importação de render_template para renderizar arquivos HTML dentro da pasta templates
+from flask import Flask, render_template
 
-# ---------------- CONEXÃO COM BANCO DE DADOS ----------------
-try:
-    # Tenta conectar ao banco MySQL
-    conexao = mysql.connector.connect(
-        host="localhost",                          # Endereço do servidor MySQL
-        user="seu_usuario",                        # Nome de usuário do MySQL (troque pelo seu)
-        password="sua_senha",                      # Senha do MySQL (troque pela sua)
-        database="ENCHENTES_DB"                    # Nome do banco de dados usado
-    )
-    cursor = conexao.cursor()                      # Cria cursor para executar comandos SQL
-except Exception as e:
-    # Caso ocorra erro na conexão, imprime no terminal
-    print(f"Erro ao conectar ao banco de dados: {e}")
+# Importação do CORS para permitir acesso da API por qualquer origem (frontend em React, etc.)
+from flask_cors import CORS
 
-# ---------------- INICIA APLICAÇÃO ----------------
-if __name__ == "__main__":
-    app.run(debug=True)                                # Inicia o servidor Flask em modo debug
+# Inicializa a aplicação Flask, apontando a pasta templates como local dos HTMLs
+app = Flask(
+    __name__,                      # Nome do aplicativo
+    template_folder='templates',  # Pasta onde estão os arquivos .html
+    static_folder='static'        # Pasta onde estão os arquivos .css e .jsx
+)
+
+# Ativa o suporte a CORS na aplicação para evitar erros de "Cross-Origin Request"
+CORS(app)
+
+# Rota principal '/' que renderiza a página index.html (frontend)
+@app.route('/')
+def index():
+    # Renderiza o arquivo HTML templates/index.html (com React dentro)
+    return render_template('index.html')
+
+# Executa a aplicação em modo debug (com recarregamento automático)
+if __name__ == '__main__':
+    # Roda o servidor Flask na porta padrão (5000), com debug ativado
+    app.run(debug=True)

@@ -4,93 +4,119 @@
 
 # Este módulo define as rotas da aplicação Flask para gerenciar relatos de enchentes.
 
-from flask import request, jsonify                # Para receber dados (request) e responder em JSON
-from datetime import datetime                     # Para usar data/hora
-import os                                         # Para criar pasta e salvar arquivos
-from models import conexao, cursor                # Usa conexão e cursor do banco (importado do models)
+# routes.py - Arquivo que define todas as rotas da aplicacao Flask
 
-# Função que salva os relatos em arquivo diário
-def salvar_em_arquivo(bairro, nivel, mensagem):
-    try:
-        os.makedirs("relatorios", exist_ok=True)  # Cria pasta "relatorios" se ainda não existir
-        nome_arquivo = datetime.now().strftime("relatorios/relatorio_%Y-%m-%d.txt")
-        with open(nome_arquivo, "a", encoding="utf-8") as arquivo:
-            arquivo.write(f"Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            arquivo.write(f"Bairro: {bairro}\n")
-            arquivo.write(f"Nível: {nivel}\n")
-            arquivo.write(f"Mensagem: {mensagem}\n")
-            arquivo.write("-" * 40 + "\n")
-    except Exception as e:
-        print(f"Erro ao salvar em arquivo: {e}")
+from flask import request, jsonify, Response         # Funcoes para requisicoes e respostas
+from datetime import datetime, timedelta             # Para manipulacao de datas
+from models import Session, Relato                   # Importa o modelo e a sessao do banco
 
-# Função principal que registra as rotas no app Flask
-def configurar_rotas(app):
+# Funcao que registra todas as rotas no app Flask
+def register_routes(app):
 
-    # Rota para registrar um novo relato (não aprovado por padrão)
-    @app.route("/relato", methods=["POST"])
-    def receber_relato():
-        try:
-            dados = request.get_json()
-            bairro = dados.get("bairro")
-            nivel = dados.get("nivel")
-            mensagem = dados.get("mensagem")
-            data = datetime.now()
-            cursor.execute(
-                "INSERT INTO RELATOS (BAIRRO, NIVEL, MENSAGEM, DATA, APROVADO) VALUES (%s, %s, %s, %s, %s)",
-                (bairro, nivel, mensagem, data, False)
-            )
-            conexao.commit()
-            salvar_em_arquivo(bairro, nivel, mensagem)  # Também salva no arquivo diário
-            return jsonify({"mensagem": "Relato salvo (aguardando aprovação)."}), 201
-        except Exception as e:
-            return jsonify({"erro": f"Erro ao salvar relato: {str(e)}"}), 500
-
-    # Rota para listar relatos (com filtro ?aprovado=1 ou não)
-    @app.route("/relatos", methods=["GET"])
+    # Rota GET para listar apenas relatos aprovados
+    @app.route('/relatos', methods=['GET'])
     def listar_relatos():
-        try:
-            aprovado = request.args.get("aprovado")
-            if aprovado is not None:
-                cursor.execute("SELECT * FROM RELATOS WHERE APROVADO = %s", (aprovado,))
-            else:
-                cursor.execute("SELECT * FROM RELATOS")
-            resultados = cursor.fetchall()
-            colunas = [desc[0] for desc in cursor.description]
-            dados = [dict(zip(colunas, linha)) for linha in resultados]
-            return jsonify(dados)
-        except Exception as e:
-            return jsonify({"erro": f"Erro ao listar relatos: {str(e)}"}), 500
+        session = Session()  # Inicia a sessao com o banco
+        relatos = session.query(Relato).filter_by(aprovado=True).all()  # Busca relatos com aprovado=True
 
-    # Rota para aprovar relato por ID
-    @app.route("/aprovar/<int:id_relato>", methods=["PUT"])
-    def aprovar_relato(id_relato):
-        try:
-            cursor.execute("UPDATE RELATOS SET APROVADO = TRUE WHERE ID = %s", (id_relato,))
-            conexao.commit()
-            return jsonify({"mensagem": f"Relato {id_relato} aprovado com sucesso."})
-        except Exception as e:
-            return jsonify({"erro": f"Erro ao aprovar relato: {str(e)}"}), 500
+        # Prepara os dados como lista de dicionarios
+        resposta = [{
+            "id": r.id,
+            "title": r.title,
+            "message": r.message,
+            "severity": r.severity,
+            "latitude": r.latitude,
+            "longitude": r.longitude,
+            "neighborhood": r.neighborhood,
+            "water_level": r.water_level,
+            "affected_people": r.affected_people,
+            "rescue_needed": r.rescue_needed,
+            "people_trapped": r.people_trapped,
+            "access_blocked": r.access_blocked
+        } for r in relatos]
 
-    # Rota para deletar relato por ID
-    @app.route("/relato/<int:id_relato>", methods=["DELETE"])
-    def deletar_relato(id_relato):
-        try:
-            cursor.execute("DELETE FROM RELATOS WHERE ID = %s", (id_relato,))
-            conexao.commit()
-            return jsonify({"mensagem": f"Relato {id_relato} deletado com sucesso."})
-        except Exception as e:
-            return jsonify({"erro": f"Erro ao deletar relato: {str(e)}"}), 500
+        session.close()  # Fecha conexao com o banco
+        return jsonify(resposta)  # Retorna os dados em formato JSON
 
-    # Rota de login básico para administrador
-    @app.route("/login", methods=["POST"])
-    def login_admin():
+    # Rota POST para criar um novo relato
+    @app.route('/relatos', methods=['POST'])
+    def criar_relato():
+        dados = request.get_json()  # Recebe os dados enviados em JSON
         try:
-            dados = request.get_json()
-            usuario = dados.get("usuario")
-            senha = dados.get("senha")
-            if usuario == "admin" and senha == "1234":  # Login fixo para exemplo
-                return jsonify({"mensagem": "Login autorizado", "token": "admin123"})
-            else:
-                return jsonify({"mensagem": "Credenciais inválidas"}), 401
+            # Cria um novo objeto Relato com os dados recebidos
+            novo = Relato(
+                title=dados.get("title"),
+                message=dados.get("message"),
+                severity=dados.get("severity"),
+                latitude=dados.get("latitude"),
+                longitude=dados.get("longitude"),
+                neighborhood=dados.get("neighborhood"),
+                water_level=dados.get("water_level"),
+                affected_people=dados.get("affected_people"),
+                rescue_needed=dados.get("rescue_needed"),
+                people_trapped=dados.get("people_trapped"),
+                access_blocked=dados.get("access_blocked"),
+                aprovado=False  # Sempre comecando como nao aprovado
+            )
+            session = Session()
+            session.add(novo)  # Adiciona o relato
+            session.commit()   # Salva no banco
+            session.close()
+            return jsonify({"mensagem": "Relato recebido com sucesso"}), 201
         except Exception as e:
-            return jsonify({"erro": f"Erro no login: {str(e)}"}), 500
+            return jsonify({"erro": f"Erro ao criar relato: {str(e)}"}), 500
+
+    # Rota PUT para aprovar um relato pelo ID
+    @app.route('/relatos/<int:relato_id>/aprovar', methods=['PUT'])
+    def aprovar_relato(relato_id):
+        session = Session()
+        relato = session.query(Relato).get(relato_id)  # Busca o relato pelo ID
+        if not relato:
+            session.close()
+            return jsonify({"erro": "Relato nao encontrado"}), 404
+        relato.aprovado = True  # Marca como aprovado
+        session.commit()
+        session.close()
+        return jsonify({"mensagem": "Relato aprovado com sucesso"})
+
+    # Rota DELETE para excluir relato pelo ID
+    @app.route('/relatos/<int:relato_id>', methods=['DELETE'])
+    def deletar_relato(relato_id):
+        session = Session()
+        relato = session.query(Relato).get(relato_id)
+        if not relato:
+            session.close()
+            return jsonify({"erro": "Relato nao encontrado"}), 404
+        session.delete(relato)  # Remove
+        session.commit()       # Aplica no banco
+        session.close()
+        return jsonify({"mensagem": "Relato excluido com sucesso"})
+
+    # Rota GET que exporta os relatos aprovados em .txt (relatos da semana)
+    @app.route('/relatos/semana', methods=['GET'])
+    def exportar_txt_semana():
+        session = Session()
+        sete_dias_atras = datetime.now() - timedelta(days=7)  # Calculo de 7 dias atras
+
+        # Busca relatos aprovados (por enquanto nao temos campo data)
+        relatos = session.query(Relato).filter(Relato.aprovado == True, Relato.id > 0).all()
+
+        linhas = []  # Armazena as linhas do arquivo
+        for r in relatos:
+            linhas.append(f"Titulo: {r.title}")
+            linhas.append(f"Bairro: {r.neighborhood}")
+            linhas.append(f"Gravidade: {r.severity}")
+            linhas.append(f"Pessoas Atingidas: {r.affected_people}")
+            linhas.append(f"Altura da Agua: {r.water_level} cm")
+            linhas.append(f"Resgate Necessario: {'Sim' if r.rescue_needed else 'Nao'}")
+            linhas.append("-" * 40)
+
+        session.close()
+        txt_content = "\n".join(linhas)  # Junta todas as linhas
+
+        # Retorna como arquivo .txt para download
+        return Response(
+            txt_content,
+            mimetype='text/plain',
+            headers={"Content-Disposition": "attachment;filename=relatos_semana.txt"}
+        )
