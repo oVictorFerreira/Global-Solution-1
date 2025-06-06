@@ -30,13 +30,13 @@ Os dados são enviados via **HTTP seguro** para a **plataforma TagoIO**, onde s�
 
 ---
 
-## 🧠 Lógica de Alerta
+## Lógica de Alerta
 
 O sistema gera alertas com base em condições críticas:
 
 - 🔸 `nivel_agua < 10cm` → **ALERTA: Risco de transbordamento!**  
 - 🔸 `temperatura > 40°C` → **ALERTA: Risco térmico em galerias**  
-- 🔸 `umidade > 80%` → ** ALERTA: Umidade excessiva detectada!**  
+- 🔸 `umidade > 80%` → **ALERTA: Umidade excessiva detectada!**  
 - 🔴 `chuva == 1 && nivel_agua < 15cm` → **ALERTA CRÍTICO de alagamento iminente**
 
 Esses alertas:
@@ -46,9 +46,9 @@ Esses alertas:
 
 ---
 
-## 🧰 Componentes Utilizados
+## Componentes Utilizados
 
-### 📟 Camada IoT
+### Camada IoT
 - ESP32 DevKit  
 - Sensor Ultrassônico (nível)  
 - Sensor DHT22 (clima)  
@@ -56,19 +56,19 @@ Esses alertas:
 - LCD 16x2 I2C  
 - LED de alerta  
 
-### ☁️ Back-End – TagoIO
+### Back-End – TagoIO
 - Buckets de dados (nível, temperatura, umidade, chuva)  
 - Dashboards interativos com gráficos
 - Ações automatizadas (email, SMS)  
 
-### 🖥️ Aplicação
+### Aplicação
 - Mapa com localização dos sensores  
 - Gráficos semanais de variação de nível de água  
 - Histórico de alertas e eventos  
 
 ---
 
-## 📦 Estrutura do Código
+## Estrutura do Código
 
 ### `setup()`
 - Inicializa sensores, LCD, Wi-Fi  
@@ -83,7 +83,7 @@ Esses alertas:
 
 ---
 
-## 🚨 Ações Automatizadas no TagoIO
+## Ações Automatizadas no TagoIO
 
 A plataforma TagoIO permite configurar **Actions** para disparar alertas automáticos quando condições críticas são detectadas. Por exemplo:
 
@@ -91,11 +91,11 @@ A plataforma TagoIO permite configurar **Actions** para disparar alertas automá
 
 Isso permite **resposta imediata em áreas de risco**, com base nos dados reais enviados pelos dispositivos.
 
-**img
+[https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/alerta.jpeg]
 
 ---
 
-## 🧪 Execução
+## Execução
 
 1. Acesse o Wokwi e carregue o código do projeto  
 2. Verifique o Wi-Fi e insira o token do TagoIO  
@@ -106,11 +106,12 @@ Isso permite **resposta imediata em áreas de risco**, com base nos dados reais 
 
 ## 📎 Anexos
 
-- `codigo.cpp`: Código completo do microcontrolador  
-- [Simulação de sensores no Wokwi  ](https://wokwi.com/projects/432868844409069569)
+- [`codigo.cpp`]: https://github.com/oVictorFerreira/Global-Solution-1/blob/07bc6f43ddfeb1143648cd9c538da971944ed651/GS_EDGE_2025/codigo.cpp  
+- [Simulação de sensores no Wokwi]: https://wokwi.com/projects/432868844409069569
 - Dashboard TagoIO com gráficos e mapa!
+[https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/dashboard.png]
 - Fluxo de arquitetura do sistema  
-
+[https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/Fluxo%20EDGE.drawio.png]
 ---
 
 ## 📹 Demonstração
