@@ -1,156 +1,157 @@
+// Bibliotecas Utilizadas
+#include <WiFi.h>
+#include <HTTPClient.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <WiFi.h>
-#include <PubSubClient.h>
-#include <ArduinoJson.h>
+#include "DHT.h"
 
-// Credenciais WiFi
-const char* SSID = "Wokwi-GUEST";
-const char* PASSWORD = "";
-
-// Configuração MQTT
-const char* BROKER_MQTT = "test.mosquitto.org";
-const int BROKER_PORT = 1883;
-const char* ID_MQTT = "ESP32_galeria_monitor";
-const char* TOPIC_PUBLISH = "sensores/galeria/nivel";
-
-// Pinos do sensor ultrassônico
+// Definições de Pinos 
 #define TRIG_PIN 5
 #define ECHO_PIN 18
+#define CHUVA_PIN 19
+#define LED_PIN 2
+#define DHT_PIN 15
+#define DHTTYPE DHT22
+#define SDA_PIN 26  
+#define SCL_PIN 25  
 
-// LCD I2C
-const int LCD_COLUMNS = 16;
-const int LCD_ROWS = 2;
-LiquidCrystal_I2C lcd(0x27, LCD_COLUMNS, LCD_ROWS);
+// Wi-Fi 
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
 
-// Clientes WiFi e MQTT
-WiFiClient espClient;
-PubSubClient MQTT(espClient);
+// Token do TagoIO 
+const char* TAGO_TOKEN = "";
 
-// Temporização para envio
-unsigned long publishUpdate = 0;
-const int PUBLISH_DELAY = 5000; 
-const int TAMANHO_JSON = 200;
+// Início
+DHT dht(DHT_PIN, DHTTYPE);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// Funções auxiliares
-void setup_wifi();
-void initMQTT();
-void reconnectMQTT();
-void reconnectWiFi();
-void checkWiFiAndMQTT();
-float readDistance();
+void setup() {
+  Serial.begin(115200);
 
-void setup_wifi() {
-  Serial.print("Conectando ao WiFi...");
-  WiFi.begin(SSID, PASSWORD);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(CHUVA_PIN, INPUT_PULLUP);
+  pinMode(LED_PIN, OUTPUT);
+
+  dht.begin();
+  Wire.begin(SDA_PIN, SCL_PIN);
+  //lcd está sendo usada apenas para testes internos
+  lcd.init();
+  lcd.backlight();
+
+  lcd.setCursor(0, 0);
+  lcd.print("ChuvaSegura");
+  lcd.setCursor(0, 1);
+  lcd.print("Conectando...");
+
+  WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\nWiFi conectado!");
-  Serial.print("IP: ");
-  Serial.println(WiFi.localIP());
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("WiFi: OK");
+  delay(1000);
 }
 
-void initMQTT() {
-  MQTT.setServer(BROKER_MQTT, BROKER_PORT);
-}
-
-void reconnectMQTT() {
-  while (!MQTT.connected()) {
-    Serial.print("Conectando ao broker MQTT...");
-    if (MQTT.connect(ID_MQTT)) {
-      Serial.println("Conectado!");
-    } else {
-      Serial.print("Falhou, rc=");
-      Serial.print(MQTT.state());
-      Serial.println(" tentando novamente em 5 segundos");
-      delay(5000);
-    }
-  }
-}
-
-void reconnectWiFi() {
-  if (WiFi.status() == WL_CONNECTED) return;
-  WiFi.begin(SSID, PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(100);
-    Serial.print(".");
-  }
-  Serial.println("\nWiFi reconectado!");
-}
-
-void checkWiFiAndMQTT() {
-  if (WiFi.status() != WL_CONNECTED) reconnectWiFi();
-  if (!MQTT.connected()) reconnectMQTT();
-}
-
-// Lê o nível da galeria com sensor ultrassônico
-float readDistance() {
+void loop() {
+  // Medir nível da água
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
-  float duration = pulseIn(ECHO_PIN, HIGH);
-  return duration * 0.0344 / 2;
-}
+  long duracao = pulseIn(ECHO_PIN, HIGH);
+  float distancia_cm = duracao * 0.034 / 2;
 
-void setup() {
-  Serial.begin(115200);
+  // Temperatura e Umidade
+  float temperatura = dht.readTemperature();
+  float umidade = dht.readHumidity();
+  // Wokwi não simula sensores de chuva reais, então usamos um pino digital (CHUVA_PIN) 
+  // que pode ser ligado ou desligado manualmente para testes. 
+  // >>> PARA TESTAR manualmente como se estivesse sempre chovendo:
+  // Basta forçar o valor da variável:
+  // remova o "!" para ler o valor diretamente:
+  // int chuva = digitalRead(CHUVA_PIN);
+  int chuva = digitalRead(CHUVA_PIN);
 
-  lcd.init();
-  lcd.backlight();
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Iniciando...");
+  // Alertas Críticos
+  bool alerta_agua = false;
+  bool alerta_temp = false;
+  bool alerta_umid = false;
+  bool alerta_critico = false;
 
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-
-  setup_wifi();
-  initMQTT();
-}
-
-void loop() {
-  checkWiFiAndMQTT();
-  MQTT.loop();
-
-  if ((millis() - publishUpdate) >= PUBLISH_DELAY) {
-    publishUpdate = millis();
-
-    float distancia_cm = readDistance();
-    String local_id = "Sensor_Galeria_01";
-    String status_nivel;
-
-    // Classifica o nível
-    if (distancia_cm <= 15) {
-      status_nivel = "Crítico";
-    } else if (distancia_cm > 15 && distancia_cm <= 50) {
-      status_nivel = "Alerta";
-    } else {
-      status_nivel = "Normal";
-    }
-
-    // Cria JSON para envio
-    StaticJsonDocument<TAMANHO_JSON> doc;
-    doc["local"] = local_id;
-    doc["nivel_cm"] = distancia_cm;
-    doc["status"] = status_nivel;
-
-    char buffer[TAMANHO_JSON];
-    serializeJson(doc, buffer);
-
-    // Publica via MQTT
-    MQTT.publish(TOPIC_PUBLISH, buffer);
-    Serial.println(buffer);
-
-    // Exibe no LCD
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Nivel: " + String(distancia_cm, 1) + "cm");
-    lcd.setCursor(0, 1);
-    lcd.print("Status: " + status_nivel);
+  if (distancia_cm < 10) {
+    alerta_agua = true;
+    Serial.println("⚠️ ALERTA: Nível de água muito alto!");
   }
-}
 
+  if (temperatura > 40.0) {
+    alerta_temp = true;
+    Serial.println("⚠️ ALERTA: Temperatura extrema!");
+  }
+
+  if (umidade > 95.0) {
+    alerta_umid = true;
+    Serial.println("⚠️ ALERTA: Umidade excessiva detectada!");
+  }
+
+  if (chuva && distancia_cm < 15) {
+    alerta_critico = true;
+    Serial.println("🚨 SITUAÇÃO CRÍTICA: CHUVA + NÍVEL ALTO!");
+  }
+
+  // LCD: Mensagem personalizada 
+  lcd.clear();
+  if (alerta_critico) {
+    lcd.setCursor(0, 0);
+    lcd.print("!! ALERTA TOTAL !!");
+    lcd.setCursor(0, 1);
+    lcd.print("Evacuar!");
+  } else if (alerta_agua) {
+    lcd.setCursor(0, 0);
+    lcd.print("Nivel Critico!");
+    lcd.setCursor(0, 1);
+    lcd.print("A: ");
+    lcd.print(distancia_cm, 0);
+    lcd.print("cm");
+  } else {
+    lcd.setCursor(0, 0);
+    lcd.print("A:");
+    lcd.print(distancia_cm, 0);
+    lcd.print("cm ");
+    lcd.print(chuva ? "C" : "S"); // C = Chuva, S = Seco
+    lcd.setCursor(0, 1);
+    lcd.print((int)temperatura);
+    lcd.print("C ");
+    lcd.print((int)umidade);
+    lcd.print("%");
+  }
+
+  // LED acende se houver alerta
+  digitalWrite(LED_PIN, alerta_agua || alerta_temp || alerta_umid || alerta_critico ? HIGH : LOW);
+
+  // Envio para TagoIO 
+  if (WiFi.status() == WL_CONNECTED) {
+    HTTPClient http;
+    http.begin("https://api.tago.io/data");
+    http.addHeader("Content-Type", "application/json");
+    http.addHeader("Device-Token", TAGO_TOKEN);
+
+    String payload = "[";
+    payload += "{\"variable\":\"nivel_agua\",\"value\":" + String(distancia_cm) + "},";
+    payload += "{\"variable\":\"temperatura\",\"value\":" + String(temperatura) + "},";
+    payload += "{\"variable\":\"umidade\",\"value\":" + String(umidade) + "},";
+    payload += "{\"variable\":\"chuva\",\"value\":" + String(chuva) + "}";
+    payload += "]";
+
+    int resposta = http.POST(payload);
+    Serial.println("Resposta TagoIO: " + String(resposta));
+    http.end();
+  }
+
+  delay(20000); 
+}
