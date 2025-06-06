@@ -91,8 +91,6 @@ A plataforma TagoIO permite configurar **Actions** para disparar alertas automá
 
 Isso permite **resposta imediata em áreas de risco**, com base nos dados reais enviados pelos dispositivos.
 
-[https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/alerta.jpeg]
-
 ---
 
 ## Execução
