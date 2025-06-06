@@ -1,10 +1,10 @@
-# 🌧️ AlagaNão! – Monitoramento Inteligente de Galerias
+# AlagaNão! – Monitoramento Inteligente de Galerias
 
 **Projeto GS 2025 – Edge Computing | 1ESPS**
 
 ---
 
-## 👨‍💻 Integrantes
+## Integrantes
 
 - João Victor da Silva Ferreira – RM 560439  
 - Erick Cardoso – RM 560440  
@@ -12,13 +12,13 @@
 
 ---
 
-## ❗ Problema
+## Problema
 
 Redes de esgoto e galerias subterrâneas em áreas urbanas frequentemente transbordam em períodos de chuva intensa, resultando em alagamentos, danos materiais e riscos à saúde. A ausência de um sistema de monitoramento em tempo real dificulta a resposta preventiva da Defesa Civil.
 
 ---
 
-## 💡 Solução: AlagaNão!
+## Solução: AlagaNão!
 
 Desenvolvemos um sistema baseado em **ESP32** que realiza a leitura de sensores distribuídos pela cidade:
 
@@ -34,9 +34,9 @@ Os dados são enviados via **HTTP seguro** para a **plataforma TagoIO**, onde s�
 
 O sistema gera alertas com base em condições críticas:
 
-- 🔸 `nivel_agua < 10cm` → **risco de transbordamento**  
-- 🔸 `temperatura > 40°C` → **risco térmico em galerias**  
-- 🔸 `umidade > 95%` → **ambiente saturado, chance de chuva**  
+- 🔸 `nivel_agua < 10cm` → **ALERTA: Risco de transbordamento!**  
+- 🔸 `temperatura > 40°C` → **ALERTA: Risco térmico em galerias**  
+- 🔸 `umidade > 80%` → ** ALERTA: Umidade excessiva detectada!**  
 - 🔴 `chuva == 1 && nivel_agua < 15cm` → **ALERTA CRÍTICO de alagamento iminente**
 
 Esses alertas:
@@ -79,7 +79,7 @@ Esses alertas:
 - Avalia risco e gera alertas  
 - Atualiza LCD e LED  
 - Envia os dados para a TagoIO via HTTP POST  
-- Aguarda 20 segundos para novo ciclo  
+- Aguarda 5 segundos para novo ciclo  
 
 ---
 
@@ -87,11 +87,11 @@ Esses alertas:
 
 A plataforma TagoIO permite configurar **Actions** para disparar alertas automáticos quando condições críticas são detectadas. Por exemplo:
 
-> **Se `nivel_agua > 300cm` → Enviar e-mail para Defesa Civil com local e dados do sensor**
+> **Se `nivel_agua < 10cm` → Enviar SMS para população da região com alertas sobre os riscos**
 
 Isso permite **resposta imediata em áreas de risco**, com base nos dados reais enviados pelos dispositivos.
 
-img
+**img
 
 ---
 
@@ -100,7 +100,7 @@ img
 1. Acesse o Wokwi e carregue o código do projeto  
 2. Verifique o Wi-Fi e insira o token do TagoIO  
 3. Crie um device e configure um dashboard na TagoIO  
-4. Visualize os dados em tempo real e ative as notificações por e-mail  
+4. Visualize os dados em tempo real e ative as notificações por SMS 
 
 ---
 
