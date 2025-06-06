@@ -104,16 +104,26 @@ Isso permite **resposta imediata em áreas de risco**, com base nos dados reais 
 
 ---
 
-## 📎 Anexos
+## Anexos
 
-- [`codigo.cpp`]: https://github.com/oVictorFerreira/Global-Solution-1/blob/07bc6f43ddfeb1143648cd9c538da971944ed651/GS_EDGE_2025/codigo.cpp  
-- [Simulação de sensores no Wokwi]: https://wokwi.com/projects/432868844409069569
-- Dashboard TagoIO com gráficos e mapa!
-[https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/dashboard.png]
-- Fluxo de arquitetura do sistema  
-[https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/Fluxo%20EDGE.drawio.png]
----
+- **`codigo.cpp`**
+  [https://github.com/oVictorFerreira/Global-Solution-1/blob/07bc6f43ddfeb1143648cd9c538da971944ed651/GS_EDGE_2025/codigo.cpp](https://github.com/oVictorFerreira/Global-Solution-1/blob/07bc6f43ddfeb1143648cd9c538da971944ed651/GS_EDGE_2025/codigo.cpp)  
 
+- **Simulação de sensores no Wokwi**  
+  [https://wokwi.com/projects/432868844409069569](https://wokwi.com/projects/432868844409069569)  
+
+- **Dashboard TagoIO com gráficos e mapa**  
+  ![Dashboard TagoIO](https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/dashboard.png?raw=true)
+
+- **Fluxo de arquitetura do sistema**  
+  ![Fluxo EDGE](https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/Fluxo%20EDGE.drawio.png?raw=true)
+
+- **Imagem de alerta**  
+  ![Alerta](https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/alerta.jpeg?raw=true)
+
+- **Imagem do circuito**  
+  ![Circuito](https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/circuito.png?raw=true)
+  
 ## 📹 Demonstração
 
 🔗 *Inserir link do vídeo explicativo aqui*
