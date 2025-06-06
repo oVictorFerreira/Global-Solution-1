@@ -122,9 +122,9 @@ Isso permite **resposta imediata em áreas de risco**, com base nos dados reais 
 - **Imagem do circuito**  
   ![Circuito](https://github.com/oVictorFerreira/Global-Solution-1/blob/main/GS_EDGE_2025/imgs/circuito.png?raw=true)
   
-## 📹 Demonstração
+## Vídeo Explicativo
 
-🔗 *Inserir link do vídeo explicativo aqui*
+ ![Youtube](https://youtu.be/C2agYiTL5x4)
 
 ---
 
