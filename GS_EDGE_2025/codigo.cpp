@@ -77,25 +77,10 @@ void loop() {
   bool umidade_excessiva = umid > 80;
   bool alerta_total = (chuva_detectada && nivel_agua < 15);
 
-  if (distancia_cm < 10) {
-    alerta_agua = true;
-    Serial.println("⚠️ ALERTA: Risco de transbordamento!");
-  }
-
-  if (temperatura > 40.0) {
-    alerta_temp = true;
-    Serial.println("⚠️ ALERTA: Risco térmico em galeria!");
-  }
-
-  if (umidade > 80.0) {
-    alerta_umid = true;
-    Serial.println("⚠️ ALERTA: Umidade excessiva detectada!");
-  }
-
-  if (chuva && distancia_cm < 15) {
-    alerta_critico = true;
-    Serial.println("🚨 SITUAÇÃO CRÍTICA: CHUVA + NÍVEL ALTO!");
-  }
+  if (agua_perigosa) Serial.println(">>> ⚠️ ALERTA: Risco de transbordamento!");
+  if (calor_excessivo) Serial.println(">>> ⚠️ ALERTA: Risco térmico em galeria!");
+  if (umidade_excessiva) Serial.println(">>> ⚠️ ALERTA: Umidade excessiva detectada!");
+  if (alerta_total) Serial.println(">>> 🚨 SITUAÇÃO CRÍTICA: CHUVA + NÍVEL ALTO!");
 
   // Atualiza LCD
   lcd.clear();
@@ -113,13 +98,15 @@ void loop() {
     lcd.print("cm");
   } else {
     lcd.setCursor(0, 0);
-    lcd.print("A:");
+    lcd.print("Nivel:");
     lcd.print(nivel_agua, 0);
     lcd.print("cm ");
-    lcd.print(chuva_detectada ? "C" : "S"); // C = Chuva, S = Seco
+    lcd.print(chuva_detectada ? "PL" : "S"); // PL = Precipitação Líquida, S = Seco
     lcd.setCursor(0, 1);
+    lcd.print("T:");
     lcd.print((int)temp);
     lcd.print("C ");
+    lcd.print(" U:");
     lcd.print((int)umid);
     lcd.print("%");
   }
